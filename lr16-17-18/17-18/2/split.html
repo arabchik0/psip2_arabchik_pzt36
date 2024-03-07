@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Примеры методов объекта String</title>
+</head>
+<body>
+    <h1>Примеры методов объекта String</h1>
+
+    <p>Текст для анализа: "Это пример текста с некоторыми словами для обработки."</p>
+
+    <h2>Метод String.split(): Разбиение текста на слова</h2>
+    <ul id="example1"></ul>
+
+    <h2>Метод String.match(): Поиск слов, начинающихся с буквы 'н'</h2>
+    <ul id="example2"></ul>
+
+    <h2>Метод String.search(): Поиск индекса слова "пример"</h2>
+    <p id="example3"></p>
+
+    <h2>Метод String.replace(): Замена слова "некоторыми" на "различными"</h2>
+    <p id="example4"></p>
+
+    <script>
+        const text = "Это пример текста с некоторыми словами для обработки.";
+
+        // Пример 1: Метод String.split()
+        const words = text.split(' ');
+        const ulExample1 = document.getElementById("example1");
+        words.forEach(word => {
+            const li = document.createElement("li");
+            li.textContent = word;
+            ulExample1.appendChild(li);
+        });
+
+        // Пример 2: Метод String.match()
+        const regex = /\bн\w*/g;
+        const matchedWords = text.match(regex);
+        const ulExample2 = document.getElementById("example2");
+        matchedWords.forEach(word => {
+            const li = document.createElement("li");
+            li.textContent = word;
+            ulExample2.appendChild(li);
+        });
+
+        // Пример 3: Метод String.search()
+        const index = text.search("пример");
+        document.getElementById("example3").textContent = `Индекс слова "пример": ${index}`;
+
+        // Пример 4: Метод String.replace()
+        const newText = text.replace("некоторыми", "различными");
+        document.getElementById("example4").textContent = newText;
+    </script>
+</body>
+</html>

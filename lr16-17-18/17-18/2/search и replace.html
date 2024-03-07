@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Примеры методов объекта String</title>
+</head>
+<body>
+    <h1>Примеры методов объекта String</h1>
+
+    <p>Текст для анализа: "Это пример текста с некоторыми словами для обработки."</p>
+
+    <h2>Метод String.search(): Поиск индекса слова "пример"</h2>
+    <p id="example3"></p>
+
+    <h2>Метод String.replace(): Замена слова "некоторыми" на "различными"</h2>
+    <p id="example4"></p>
+
+    <script>
+        const text = "Это пример текста с некоторыми словами для обработки.";
+
+        // Пример 3: Метод String.search()
+        const index = text.search("пример");
+        document.getElementById("example3").textContent = `Индекс слова "пример": ${index}`;
+
+        // Пример 4: Метод String.replace()
+        const newText = text.replace("некоторыми", "различными");
+        document.getElementById("example4").textContent = newText;
+    </script>
+</body>
+</html>

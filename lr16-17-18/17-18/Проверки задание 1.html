@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Пример формы и скрипта</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email (только на английском):</label>
+        <input type="text" id="email" name="email" required><br><br>
+
+        <label for="phone">Телефон (ровно 13 цифр):</label>
+        <input type="text" id="phone" name="phone" required><br><br>
+
+        <label for="password">Пароль (4 буквы и 4 цифры):</label>
+        <input type="password" id="password" name="password" required pattern="^(?=(?:.*[A-Za-z]){4})(?=(?:.*\d){4}).{8,}$"><br><br>
+
+        <label>Пол:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Мужской</label>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Женский</label><br><br>
+
+        <label>Интересы:</label>
+        <input type="checkbox" id="interest1" name="interest" value="Игры">
+        <label for="interest1">Игры</label>
+        <input type="checkbox" id="interest2" name="interest" value="Фильмы">
+        <label for="interest2">Фильмы</label><br><br>
+
+        <label for="country">Страна:</label>
+        <select id="country" name="country">
+            <option value="Россия">Россия</option>
+            <option value="Польша">Польша</option>
+            <option value="Беларусь">Беларусь</option>
+        </select><br><br>
+
+        <button type="button" onclick="submitForm()">Отправить</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            var formData = document.getElementById("myForm");
+            var email = formData.email.value;
+            var password = formData.password.value;
+            var phone = formData.phone.value;
+
+            // Валидация email через JavaScript и регулярное выражение
+            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailRegex.test(email)) {
+                alert("Пожалуйста, введите корректный email.");
+                return;
+            }
+
+            // Валидация телефона через JavaScript и регулярное выражение
+            var phonePattern = /^\+?\d{13}$/;
+            if (!phonePattern.test(phone)) {
+                alert("Пожалуйста, введите телефон в формате: +1234567890123");
+                return;
+            }
+
+            // Проверка на выбор пола
+            var gender = formData.gender.value;
+            if (!gender) {
+                alert("Пожалуйста, выберите ваш пол.");
+                return;
+            }
+
+            // Остальная обработка формы и отправка данных
+            var output = "Имя: " + formData.name.value + "\n";
+            output += "Email: " + email + "\n";
+            output += "Пароль: " + password + "\n";
+            output += "Телефон: " + phone + "\n";
+            output += "Пол: " + gender + "\n";
+            
+            var interests = document.getElementsByName("interest");
+            var selectedInterests = [];
+            for (var i = 0; i < interests.length; i++) {
+                if (interests[i].checked) {
+                    selectedInterests.push(interests[i].value);
+                }
+            }
+            output += "Интересы: " + (selectedInterests.length > 0 ? selectedInterests.join(", ") : "Не выбраны") + "\n";
+
+            output += "Страна: " + formData.country.value + "\n";
+
+            alert(output);
+        }
+    </script>
+</body>
+</html>

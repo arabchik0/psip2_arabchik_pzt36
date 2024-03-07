@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регулярные выражения и методы RegExp</title>
+</head>
+<body>
+    <h1>Примеры регулярных выражений и методов RegExp</h1>
+
+    <p>Текст для анализа: "Сегодня 26-10-2023 был создан этот пример. Завтра будет 27-10-2023."</p>
+
+    <h2>Пример 1: Поиск всех дат в тексте</h2>
+    <p id="example1"></p>
+
+    <h2>Пример 2: Извлечение дат с помощью exec()</h2>
+    <ul id="example2"></ul>
+
+    <script>
+        const text = "Сегодня 26-10-2023 был создан этот пример. Завтра будет 27-10-2023.";
+        const dateRegex = /\d{2}-\d{2}-\d{4}/g;
+
+        // Пример 1: Поиск всех дат в тексте с использованием метода match()
+        const dates = text.match(dateRegex);
+        document.getElementById("example1").textContent = "Найденные даты: " + dates.join(", ");
+
+        // Пример 2: Извлечение дат с использованием метода exec()
+        const dateList = document.getElementById("example2");
+        let match;
+        while ((match = dateRegex.exec(text)) !== null) {
+            const listItem = document.createElement("li");
+            listItem.textContent = match[0];
+            dateList.appendChild(listItem);
+        }
+    </script>
+</body>
+</html>

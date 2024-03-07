@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Пример формы и скрипта</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label>Пол:</label>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Мужской</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Женский</label><br><br>
+
+        <label>Интересы:</label>
+        <input type="checkbox" id="interest1" name="interest" value="Игры">
+        <label for="interest1">Игры</label>
+        <input type="checkbox" id="interest2" name="interest" value="фильмы">
+        <label for "interest2">Фильмы</label><br><br>
+
+        <label for="country">Страна:</label>
+        <select id="country" name="country">
+            <option value="Россия">Россия</option>
+            <option value="Польша">Польша</option>
+            <option value="Беларусь">Беларусь</option>
+        </select><br><br>
+
+        <button type="button" onclick="submitForm()">Отправить</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            var formData = document.getElementById("myForm");
+            var output = "Имя: " + formData.name.value + "\n";
+            output += "Email: " + formData.email.value + "\n";
+            output += "Пол: " + (formData.gender.value || "Не выбран") + "\n";
+            
+            var interests = document.getElementsByName("interest");
+            var selectedInterests = [];
+            for (var i = 0; i < interests.length; i++) {
+                if (interests[i].checked) {
+                    selectedInterests.push(interests[i].value);
+                }
+            }
+            output += "Интересы: " + (selectedInterests.length > 0 ? selectedInterests.join(", ") : "Не выбраны") + "\n";
+
+            output += "Страна: " + formData.country.value + "\n";
+
+            alert(output);
+
+            // Добавим примеры доступа к элементам формы и их свойствам
+            var nameField = formData.name;
+            var emailField = formData.email;
+            var genderRadioButtons = formData.gender;
+            var interestsCheckboxes = interests;
+            var countrySelect = formData.country;
+
+            // Примеры методов и событий
+            nameField.focus(); // Установить фокус на поле имени
+            nameField.blur(); // Убрать фокус с поля имени
+
+            // События
+            emailField.addEventListener("change", function() {
+                console.log("Email был изменен.");
+            });
+
+            nameField.addEventListener("input", function() {
+                console.log("Значение поля имени было изменено.");
+            });
+
+            // Пример событий cut, copy и paste
+            emailField.addEventListener("cut", function() {
+                console.log("Текст был вырезан.");
+            });
+            emailField.addEventListener("copy", function() {
+                console.log("Текст был скопирован.");
+            });
+            emailField.addEventListener("paste", function() {
+                console.log("Текст был вставлен.");
+            });
+        }
+    </script>
+</body>
+</html>
